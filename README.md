@@ -9,7 +9,8 @@ mkdir src && cd src
 git clone https://github.com/LeonardoDiCaprio1/compressed_image.git
 cd /compressed_image/master/compress_image/scripts
 chmod +x compress.py
-cd ..
+cd
+cd compressed_image
 catkin_make
 ```
 ### 从机端
@@ -18,8 +19,9 @@ mkdir uncompress_img && cd uncompress_img
 mkdir src && cd src
 git clone https://github.com/LeonardoDiCaprio1/compressed_image.git
 cd /compressed_image/serve/compress_image/scripts
-chmod +x uncompress.py
-cd ..
+chmod +x *.py
+cd
+cd compressed_image
 catkin_make
 ```
 # 使用说明
