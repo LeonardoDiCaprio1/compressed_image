@@ -37,7 +37,7 @@ roslaunch compress_image compress.launch
 source devel/setup.bash
 roslaunch uncompress_image uncompress.launch
 ```
-- 监听压缩后的相机话题
+- 监听压缩后的相机话题或原始相机话题
 ```
 source devel/setup.bash
 rosrun uncompress_image img_monitor.py
