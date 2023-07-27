@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<launch>
+  <!-- 启动yolov8和ROS包装器 -->
+  <node pkg="uncompress_image" type="compressed.py" name="uncompress" output="screen" >
+  </node>
+</launch>
