@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<launch>
+  <node pkg="compress_image" type="compress.py" name="compress" output="screen" >
+  </node>
+</launch>
