@@ -7,6 +7,8 @@
 mkdir compress_img && cd compress_img
 mkdir src && cd src
 git clone https://github.com/LeonardoDiCaprio1/compressed_image.git
+cd /compressed_image/master/compress_image/scripts
+chmod +x compress.py
 cd ..
 catkin_make
 ```
@@ -15,6 +17,8 @@ catkin_make
 mkdir uncompress_img && cd uncompress_img
 mkdir src && cd src
 git clone https://github.com/LeonardoDiCaprio1/compressed_image.git
+cd /compressed_image/serve/compress_image/scripts
+chmod +x compress.py
 cd ..
 catkin_make
 ```
