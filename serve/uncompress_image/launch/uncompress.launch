@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <launch>
-  <node pkg="uncompress_image" type="compressed.py" name="uncompress" output="screen" >
+  <node pkg="uncompress_image" type="uncompress.py" name="uncompress" output="screen" >
   </node>
 </launch>
