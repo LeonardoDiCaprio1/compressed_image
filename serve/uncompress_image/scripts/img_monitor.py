@@ -1,37 +1,46 @@
-import rospy
-from std_msgs.msg import Empty
-from time import time
-from sensor_msgs.msg import Image,CompressedImage
+#!/usr/bin/env python3
 
-class ImageTransferRate:
+import rospy
+from sensor_msgs.msg import CompressedImage
+import time
+
+class ImageReceiver:
     def __init__(self):
         self.image_count = 0
-        self.start_time = time()
-
-        self.publisher = rospy.Publisher('/trigger_image_publish', Empty, queue_size=1)
-        # 每秒钟发布一次消息
-        rospy.Timer(rospy.Duration(1.0), self.publish_image) 
-
-    def publish_image(self, event):
-        self.publisher.publish(Empty())
+        self.start_time = time.time()
+        self.running = True
 
     def image_callback(self, msg):
         self.image_count += 1
 
     def compute_transfer_rate(self):
-        elapsed_time = time() - self.start_time
+        current_time = time.time()
+        elapsed_time = current_time - self.start_time
         # 传输速率 = 图像计数 / 经过的时间
         transfer_rate = self.image_count / elapsed_time 
         rospy.loginfo(f"Image transfer rate: {transfer_rate} images/s")
 
-def main():
-        rospy.init_node('image_transfer_rate', anonymous=True)
-        image_rate = ImageTransferRate()
-        #rospy.Subscriber('/camera/color/image_raw', Image, image_rate.image_callback)
-        rospy.Subscriber('/compressed_camera_topic', CompressedImage, image_rate.image_callback)
-         # 每5秒钟计算一次传输速率
-        rospy.Timer(rospy.Duration(5.0), lambda event: image_rate.compute_transfer_rate())
-        rospy.spin()
+        self.start_time = current_time  # 更新起始时间
+        self.image_count = 0  # 重置图像计数
+
+    def shutdown(self):
+        self.running = False
+
+def image_receiver():
+    # 初始化ROS节点
+    rospy.init_node('image_receiver', anonymous=True)
+
+    receiver = ImageReceiver()
+    # 订阅压缩图像话题
+    rospy.Subscriber('/compressed_camera_topic', CompressedImage, receiver.image_callback)
+
+    # 每5秒钟计算一次传输速率
+    rate = rospy.Rate(0.2)
+    while receiver.running and not rospy.is_shutdown():
+        receiver.compute_transfer_rate()
+        rate.sleep()
+
+    rospy.on_shutdown(receiver.shutdown)
 
 if __name__ == '__main__':
-    main()
+    image_receiver()
