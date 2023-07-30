@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import rospy
-from sensor_msgs.msg import CompressedImage
+from sensor_msgs.msg import CompressedImage,Image
 import time
 
 class ImageReceiver:
@@ -32,7 +32,10 @@ def image_receiver():
 
     receiver = ImageReceiver()
     # 订阅压缩图像话题
+    #压缩后的话题
     rospy.Subscriber('/compressed_camera_topic', CompressedImage, receiver.image_callback)
+    #原始相机彩色话题
+    #rospy.Subscriber('/camera/color/image_raw', Image, receiver.image_callback)
 
     # 每5秒钟计算一次传输速率
     rate = rospy.Rate(0.2)
