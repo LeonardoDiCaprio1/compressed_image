@@ -1,8 +1,9 @@
 # 简介
 - 本项目是针对在ROS多机通信从机端订阅原始相机卡顿的问题而衍生的
 - 在ROS多机通信的图像传输中使用了JPEG图像压缩
+- 《传感器与微系统》
 # 操作步骤
-### 主机端
+### 发送端（主机端）
 ```
 mkdir compress_img && cd compress_img
 mkdir src && cd src
@@ -13,7 +14,7 @@ cd
 cd compressed_image
 catkin_make
 ```
-### 从机端
+### 接收端（从机端）
 ```
 mkdir uncompress_img && cd uncompress_img
 mkdir src && cd src
