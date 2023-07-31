@@ -27,13 +27,13 @@ catkin_make
 ```
 # 使用说明
 ### 主机端
-- 压缩原始相机
+- 压缩原始相机话题
 ```
 source devel/setup.bash
 roslaunch compress_image compress.launch
 ```
 ### 从机端
-- 解压压缩后的相机
+- 解压压缩后的相机话题
 ```
 source devel/setup.bash
 roslaunch uncompress_image uncompress.launch
